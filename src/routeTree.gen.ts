@@ -14,6 +14,7 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as MeetingNotesRouteImport } from './routes/meeting-notes'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ResponsibleAiRouteImport } from './routes/responsible-ai'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SmartEmailRouteImport } from './routes/smart-email'
 import { Route as TaskPlannerRouteImport } from './routes/task-planner'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -43,6 +44,11 @@ const ResponsibleAiRoute = ResponsibleAiRouteImport.update({
   path: '/responsible-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SmartEmailRoute = SmartEmailRouteImport.update({
   id: '/smart-email',
   path: '/smart-email',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/settings': typeof SettingsRoute
   '/smart-email': typeof SmartEmailRoute
   '/task-planner': typeof TaskPlannerRoute
   '/api/chat': typeof ApiChatRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/settings': typeof SettingsRoute
   '/smart-email': typeof SmartEmailRoute
   '/task-planner': typeof TaskPlannerRoute
   '/api/chat': typeof ApiChatRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/settings': typeof SettingsRoute
   '/smart-email': typeof SmartEmailRoute
   '/task-planner': typeof TaskPlannerRoute
   '/api/chat': typeof ApiChatRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
+    | '/settings'
     | '/smart-email'
     | '/task-planner'
     | '/api/chat'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
+    | '/settings'
     | '/smart-email'
     | '/task-planner'
     | '/api/chat'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
+    | '/settings'
     | '/smart-email'
     | '/task-planner'
     | '/api/chat'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   MeetingNotesRoute: typeof MeetingNotesRoute
   ResearchRoute: typeof ResearchRoute
   ResponsibleAiRoute: typeof ResponsibleAiRoute
+  SettingsRoute: typeof SettingsRoute
   SmartEmailRoute: typeof SmartEmailRoute
   TaskPlannerRoute: typeof TaskPlannerRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResponsibleAiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/smart-email': {
       id: '/smart-email'
       path: '/smart-email'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   MeetingNotesRoute: MeetingNotesRoute,
   ResearchRoute: ResearchRoute,
   ResponsibleAiRoute: ResponsibleAiRoute,
+  SettingsRoute: SettingsRoute,
   SmartEmailRoute: SmartEmailRoute,
   TaskPlannerRoute: TaskPlannerRoute,
   ApiChatRoute: ApiChatRoute,
