@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as MeetingNotesRouteImport } from './routes/meeting-notes'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ResponsibleAiRouteImport } from './routes/responsible-ai'
@@ -20,6 +21,11 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingNotesRoute = MeetingNotesRouteImport.update({
@@ -55,6 +61,7 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chat': typeof ChatRoute
   '/meeting-notes': typeof MeetingNotesRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/chat'
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/chat'
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/chat'
     | '/meeting-notes'
     | '/research'
     | '/responsible-ai'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChatRoute: typeof ChatRoute
   MeetingNotesRoute: typeof MeetingNotesRoute
   ResearchRoute: typeof ResearchRoute
   ResponsibleAiRoute: typeof ResponsibleAiRoute
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meeting-notes': {
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChatRoute: ChatRoute,
   MeetingNotesRoute: MeetingNotesRoute,
   ResearchRoute: ResearchRoute,
   ResponsibleAiRoute: ResponsibleAiRoute,
